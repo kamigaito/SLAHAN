@@ -1,0 +1,15 @@
+working/*
+build_eigen/*
+build_dynet/*
+build_compressor/*
+dataset/*
+dataset2/*
+dataset3/*
+models/*
+pretrained/*
+results/*
+tmp/*
+stanford-parser-full-2018-10-17/*
+stanford-parser-full-2018-10-17.zip
+models.zip
+!.gitkeep
