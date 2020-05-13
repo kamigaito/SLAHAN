@@ -71,7 +71,7 @@ Note that this step includes feature extractions of BERT, ELMo and Glove.
 It takes almost 1 day and 300GB of disk space.
 After that, you can retrain each model by the below command.
 `````
-./scripts/train/{model name}.sh {process_id}
+./scripts/train/google/{model name}.sh {process_id}
 `````
 
 All trained models are saved in the directory ``models/{dataset name}/{model name}_{process id}/save_{epoch}``.
@@ -79,63 +79,63 @@ To reproduce our results, run the following commands:
 
 `````
 ### Tagger ###
-./scripts/train/tagger.sh 0
-./scripts/train/tagger.sh 1
-./scripts/train/tagger.sh 2
+./scripts/train/google/tagger.sh 0
+./scripts/train/google/tagger.sh 1
+./scripts/train/google/tagger.sh 2
 `````
 `````
 ### LSTM ###
-./scripts/train/lstm.sh 0
-./scripts/train/lstm.sh 1
-./scripts/train/lstm.sh 2
+./scripts/train/google/lstm.sh 0
+./scripts/train/google/lstm.sh 1
+./scripts/train/google/lstm.sh 2
 `````
 `````
 ### LSTM-Dep ###
-./scripts/train/lstm-dep.sh 0
-./scripts/train/lstm-dep.sh 1
-./scripts/train/lstm-dep.sh 2
+./scripts/train/google/lstm-dep.sh 0
+./scripts/train/google/lstm-dep.sh 1
+./scripts/train/google/lstm-dep.sh 2
 `````
 `````
 ### Attn ###
-./scripts/train/attn.sh 0
-./scripts/train/attn.sh 1
-./scripts/train/attn.sh 2
+./scripts/train/google/attn.sh 0
+./scripts/train/google/attn.sh 1
+./scripts/train/google/attn.sh 2
 `````
 `````
 ### Base ###
-./scripts/train/base.sh 0
-./scripts/train/base.sh 1
-./scripts/train/base.sh 2
+./scripts/train/google/base.sh 0
+./scripts/train/google/base.sh 1
+./scripts/train/google/base.sh 2
 `````
 `````
 ### Parent w syn ###
-./scripts/train/parent_w_syn.sh 0
-./scripts/train/parent_w_syn.sh 1
-./scripts/train/parent_w_syn.sh 2
+./scripts/train/google/parent_w_syn.sh 0
+./scripts/train/google/parent_w_syn.sh 1
+./scripts/train/google/parent_w_syn.sh 2
 `````
 `````
 ### Parent w/o syn ###
-./scripts/train/parent_wo_syn.sh 0
-./scripts/train/parent_wo_syn.sh 1
-./scripts/train/parent_wo_syn.sh 2
+./scripts/train/google/parent_wo_syn.sh 0
+./scripts/train/google/parent_wo_syn.sh 1
+./scripts/train/google/parent_wo_syn.sh 2
 `````
 `````
 ### Child w syn ###
-./scripts/train/child_w_syn.sh 0
-./scripts/train/child_w_syn.sh 1
-./scripts/train/child_w_syn.sh 2
+./scripts/train/google/child_w_syn.sh 0
+./scripts/train/google/child_w_syn.sh 1
+./scripts/train/google/child_w_syn.sh 2
 `````
 `````
 ### Child w/o syn ###
-./scripts/train/child_wo_syn.sh 0
-./scripts/train/child_wo_syn.sh 1
-./scripts/train/child_wo_syn.sh 2
+./scripts/train/google/child_wo_syn.sh 0
+./scripts/train/google/child_wo_syn.sh 1
+./scripts/train/google/child_wo_syn.sh 2
 `````
 `````
 ### SLAHAN w syn ###
-./scripts/train/slahan_w_syn.sh 0
-./scripts/train/slahan_w_syn.sh 1
-./scripts/train/slahan_w_syn.sh 2
+./scripts/train/google/slahan_w_syn.sh 0
+./scripts/train/google/slahan_w_syn.sh 1
+./scripts/train/google/slahan_w_syn.sh 2
 `````
 `````
 ### SLAHAN w/o syn ###
