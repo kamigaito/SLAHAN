@@ -63,7 +63,7 @@ The compressed sentences used for the evaluation in our paper are included in th
 
 ## Retrain the Models
 
-Before retraining the models, you should extract features of training data set.
+Before retraining the models, you should extract features of the training data set.
 `````
 ./scripts/train/google/extract_features.sh
 `````
