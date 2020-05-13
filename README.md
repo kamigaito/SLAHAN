@@ -18,10 +18,10 @@ SLAHAN: Syntactically Look-A-Head Attention Network for Sentence Compression
 - GCC 7.5.0 (supporting the C++11 language standard)
 - CMake 3.14.1
 - Boost Libraries version 1.63
-- CUDA 10.1/10.0
+- CUDA 10.1 and 10.0
 - [HDF5 Library 1.10.4](https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.4/src/)
 - Python 3.69
-- [TensorFlow 1.15.0](https://github.com/tensorflow/tensorflow)
+- [TensorFlow 1.15.0](https://github.com/tensorflow/tensorflow) (Requires CUDA 10.0)
 - [AllenNLP 0.9.0](https://github.com/allenai/allennlp)
 - h5py 2.8.0
 - Perl 5.26.2
