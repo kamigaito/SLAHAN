@@ -148,10 +148,10 @@ for name in "${NAMES[@]}"; do
 
 done
 
-echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_p_long.csv
-echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_r_long.csv
-echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_f_long.csv
-echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_cr_long.csv
+echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_long_p.csv
+echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_long_r.csv
+echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_long_f.csv
+echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_long_cr.csv
 
 i=0
 for name in "${NAMES[@]}"; do
@@ -172,10 +172,10 @@ for name in "${NAMES[@]}"; do
     done
     wait
 
-    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_p_long.csv
-    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_r_long.csv
-    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_f_long.csv
-    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_cr_long.csv
+    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_long_p.csv
+    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_long_r.csv
+    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_long_f.csv
+    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_long_cr.csv
     
     for data_id in `seq 1 3`; do
         for model_id in `seq 0 2`; do
@@ -187,24 +187,24 @@ for name in "${NAMES[@]}"; do
             test_f=$(cat ${ROOTDIR}/test.bcn.${data_id}.long.info |grep '^F' |sed 's/ //g'|cut -d':' -f 2)
             test_cr=$(cat ${ROOTDIR}/test.bcn.${data_id}.long.info |grep '^C' |sed 's/ //g'|cut -d':' -f 2)
 
-            echo -n ",${test_p}" >> ${RESULTSDIR}/test_bcn_p_long.csv
-            echo -n ",${test_r}" >> ${RESULTSDIR}/test_bcn_r_long.csv
-            echo -n ",${test_f}" >> ${RESULTSDIR}/test_bcn_f_long.csv
-            echo -n ",${test_cr}" >> ${RESULTSDIR}/test_bcn_cr_long.csv
+            echo -n ",${test_p}" >> ${RESULTSDIR}/test_bcn_long_p.csv
+            echo -n ",${test_r}" >> ${RESULTSDIR}/test_bcn_long_r.csv
+            echo -n ",${test_f}" >> ${RESULTSDIR}/test_bcn_long_f.csv
+            echo -n ",${test_cr}" >> ${RESULTSDIR}/test_bcn_long_cr.csv
 
         done
     done
 
-    test_p=$(tail -n 1 ${RESULTSDIR}/test_bcn_p_long.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
-    test_r=$(tail -n 1 ${RESULTSDIR}/test_bcn_r_long.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
-    test_f=$(tail -n 1 ${RESULTSDIR}/test_bcn_f_long.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
-    test_cr=$(tail -n 1 ${RESULTSDIR}/test_bcn_cr_long.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
+    test_p=$(tail -n 1 ${RESULTSDIR}/test_bcn_long_p.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
+    test_r=$(tail -n 1 ${RESULTSDIR}/test_bcn_long_r.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
+    test_f=$(tail -n 1 ${RESULTSDIR}/test_bcn_long_f.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
+    test_cr=$(tail -n 1 ${RESULTSDIR}/test_bcn_long_cr.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
 
 
-    echo ",${test_p}" >> ${RESULTSDIR}/test_bcn_p_long.csv
-    echo ",${test_r}" >> ${RESULTSDIR}/test_bcn_r_long.csv
-    echo ",${test_f}" >> ${RESULTSDIR}/test_bcn_f_long.csv
-    echo ",${test_cr}" >> ${RESULTSDIR}/test_bcn_cr_long.csv
+    echo ",${test_p}" >> ${RESULTSDIR}/test_bcn_long_p.csv
+    echo ",${test_r}" >> ${RESULTSDIR}/test_bcn_long_r.csv
+    echo ",${test_f}" >> ${RESULTSDIR}/test_bcn_long_f.csv
+    echo ",${test_cr}" >> ${RESULTSDIR}/test_bcn_long_cr.csv
 
     let i++
 

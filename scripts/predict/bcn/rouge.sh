@@ -155,6 +155,11 @@ done
 # Long sentences
 
 # test size
+
+for data_id in `seq 1 3`; do
+    python ${SCRIPTSDIR}/truncate_wo_label.py -c 20 -i ${DATADIR}/test.cln.strip.sent -r ${DATADIR}/test.cln.${data_id}.gold -s ${DATADIR}/test.cln.${data_id}.gold > ${DATADIR}/test.long.cln.${data_id}.comp
+done
+
 TEST_SIZE=`cat ${DATADIR}/test.long.cln.1.gold| wc -l`
 echo ${TEST_SIZE}
 
@@ -180,9 +185,9 @@ for data_id in `seq 1 3`; do
     done
 done
 
-echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_r1_long.csv
-echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_r2_long.csv
-echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_rl_long.csv
+echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_long_r1.csv
+echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_long_r2.csv
+echo "Model,1-1,1-2,1-3,2-1,2-2,2-3,3-1,3-2,3-3,AVG" > ${RESULTSDIR}/test_bcn_long_rl.csv
 
 i=0
 for name in "${NAMES[@]}"; do
@@ -192,7 +197,7 @@ for name in "${NAMES[@]}"; do
         REFDIR=${XMLDIR}/ref.${data_id}
         for model_id in `seq 0 2`; do
             ROOTDIR=${ROOTDIRS[$i]}_${model_id}
-            python ${SCRIPTSDIR}/truncate_wo_label.py -c 20 -i ${DATADIR}/test.cln.strip.sent -r ${DATADIR}/test.cln.${data_id}.gold -s ${ROOTDIR}/test.bcn.conv > ${ROOTDIR}/test.limited.bcn.long.comp &
+            python ${SCRIPTSDIR}/truncate_wo_label.py -c 20 -i ${DATADIR}/test.cln.strip.sent -r ${DATADIR}/test.cln.${data_id}.gold -s ${ROOTDIR}/test.bcn.conv > ${ROOTDIR}/test.limited.bcn_long.comp &
         done
         wait
         # Calc Rouge
@@ -235,7 +240,7 @@ for name in "${NAMES[@]}"; do
                 echo '<body bgcolor="white">' >> ${OUTDIR}/${model_id}/html/${test_id}.html
                 #echo '<a name="'${test_id}'">['${test_id}']</a> <a href="#'${test_id}'" id='${test_id}'>' >> ${OUTDIR}/${model_id}/html/${test_id}.html
                 echo -n '<a name="1">[1]</a> <a href="#1" id=1>' >> ${OUTDIR}/${model_id}/html/${test_id}.html
-                cat ${ROOTDIR}/test.limited.bcn.long.comp |\
+                cat ${ROOTDIR}/test.limited.bcn_long.comp |\
                 head -n ${test_id} |\
                 tail -n 1 \
                 >> ${OUTDIR}/${model_id}/html/${test_id}.html
@@ -244,30 +249,30 @@ for name in "${NAMES[@]}"; do
                 echo '</html>' >> ${OUTDIR}/${model_id}/html/${test_id}.html 
                 echo ${NAME} ${model_id} ${test_id}'.html'
             done
-            perl ./ROUGE-1.5.5/ROUGE-1.5.5.pl -e ./ROUGE-1.5.5/data -n 2 -m -d -a ${OUTDIR}/${model_id}/eval.xml > ${ROOTDIR}/rouge.bcn.${data_id}.long.out
+            perl ./ROUGE-1.5.5/ROUGE-1.5.5.pl -e ./ROUGE-1.5.5/data -n 2 -m -d -a ${OUTDIR}/${model_id}/eval.xml > ${ROOTDIR}/rouge.bcn_long.${data_id}.long.out
         done
     done
-    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_r1_long.csv
-    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_r2_long.csv
-    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_rl_long.csv
+    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_long_r1.csv
+    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_long_r2.csv
+    echo -n ${NAME} >> ${RESULTSDIR}/test_bcn_long_rl.csv
     for data_id in `seq 1 3`; do
         OUTDIR=${XMLDIR}/sys.${data_id}/${NAME}
         for model_id in `seq 0 2`; do
             ROOTDIR=${ROOTDIRS[$i]}_${model_id}
-            ROUGE1=`cat ${ROOTDIR}/rouge.bcn.${data_id}.long.out |grep 'ROUGE-1 Eval' |awk -F" " '{print $5}' |awk -F":" '{R+=$2}END{print R/NR}'`
-            ROUGE2=`cat ${ROOTDIR}/rouge.bcn.${data_id}.long.out |grep 'ROUGE-2 Eval' |awk -F" " '{print $5}' |awk -F":" '{R+=$2}END{print R/NR}'`
-            ROUGEL=`cat ${ROOTDIR}/rouge.bcn.${data_id}.long.out |grep 'ROUGE-L Eval' |awk -F" " '{print $5}' |awk -F":" '{R+=$2}END{print R/NR}'`
-            echo -n ","${ROUGE1} >> ${RESULTSDIR}/test_bcn_r1_long.csv
-            echo -n ","${ROUGE2} >> ${RESULTSDIR}/test_bcn_r2_long.csv
-            echo -n ","${ROUGEL} >> ${RESULTSDIR}/test_bcn_rl_long.csv
+            ROUGE1=`cat ${ROOTDIR}/rouge.bcn_long.${data_id}.long.out |grep 'ROUGE-1 Eval' |awk -F" " '{print $5}' |awk -F":" '{R+=$2}END{print R/NR}'`
+            ROUGE2=`cat ${ROOTDIR}/rouge.bcn_long.${data_id}.long.out |grep 'ROUGE-2 Eval' |awk -F" " '{print $5}' |awk -F":" '{R+=$2}END{print R/NR}'`
+            ROUGEL=`cat ${ROOTDIR}/rouge.bcn_long.${data_id}.long.out |grep 'ROUGE-L Eval' |awk -F" " '{print $5}' |awk -F":" '{R+=$2}END{print R/NR}'`
+            echo -n ","${ROUGE1} >> ${RESULTSDIR}/test_bcn_long_r1.csv
+            echo -n ","${ROUGE2} >> ${RESULTSDIR}/test_bcn_long_r2.csv
+            echo -n ","${ROUGEL} >> ${RESULTSDIR}/test_bcn_long_rl.csv
         done
     done
-    test_r1=$(tail -n 1 ${RESULTSDIR}/test_bcn_r1_long.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
-    test_r2=$(tail -n 1 ${RESULTSDIR}/test_bcn_r2_long.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
-    test_rl=$(tail -n 1 ${RESULTSDIR}/test_bcn_rl_long.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
-    echo ",${test_r1}" >> ${RESULTSDIR}/test_bcn_r1_long.csv
-    echo ",${test_r2}" >> ${RESULTSDIR}/test_bcn_r2_long.csv
-    echo ",${test_rl}" >> ${RESULTSDIR}/test_bcn_rl_long.csv
+    test_r1=$(tail -n 1 ${RESULTSDIR}/test_bcn_long_r1.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
+    test_r2=$(tail -n 1 ${RESULTSDIR}/test_bcn_long_r2.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
+    test_rl=$(tail -n 1 ${RESULTSDIR}/test_bcn_long_rl.csv |awk -F"," '{print ($2+$3+$4+$5+$6+$7+$8+$9+$10) / 9}')
+    echo ",${test_r1}" >> ${RESULTSDIR}/test_bcn_long_r1.csv
+    echo ",${test_r2}" >> ${RESULTSDIR}/test_bcn_long_r2.csv
+    echo ",${test_rl}" >> ${RESULTSDIR}/test_bcn_long_rl.csv
 
     let i++
 
