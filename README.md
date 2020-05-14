@@ -56,7 +56,16 @@ After the setup of ``ROUGE-1.5.5`` and the execution of `predict.sh`, you can ra
 ./scripts/predict/bcn/rouge.sh
 `````
 Rouge scores are also stored in the file ``results/test_{dataset type}_{evaluation metric}.csv``, respectively.
-The reference compression is located on ``dataset/``, and the system compression is located on ``models/{dataset size}/{model name}_{process id}/comp.txt``.
+You can also calcute compression rates in characters:
+`````
+### Calculate compression rates in characters for the Google dataset ###
+./scripts/predict/google/char_len.sh
+### Calculate compression rates in characters for the BNC Corpus ###
+./scripts/predict/bcn/char_len.sh
+`````
+Compression rates in characters are also stored in the file ``results/test_{dataset type}_char_cr.csv``, respectively.
+
+Note that the reference compression is located on ``dataset/``, and the system compression is located on ``models/{dataset size}/{model name}_{process id}/comp.txt``.
 
 ## Compressed Sentences
 
@@ -149,8 +158,10 @@ After these processes, you can run the following prediction and evaluation scrip
 `````
 ./scripts/predict/google/predict.sh
 ./scripts/predict/google/rouge.sh
+./scripts/predict/google/char_len.sh
 ./scripts/predict/bcn/predict.sh
 ./scripts/predict/bcn/rouge.sh
+./scripts/predict/bcn/char_len.sh
 `````
 Finally, you can obtain results of the models in the directory `./results`.
 
