@@ -46,7 +46,7 @@ You can predict the test sets of Google dataset and BNC Corpus by the following 
 ### Prediction for the BNC Corpus ###
 ./scripts/predict/bcn/predict.sh
 `````
-Precisions, recalls, f-measures, and compression ratios for each model are stored in the file ``results/{dev or test}_{dataset size}_{evaluation metric}.csv``, respectively.
+Precisions, recalls, f-measures, and compression ratios for each model are stored in the file ``results/{dev or test}_{dataset type}_{evaluation metric}.csv``, respectively.
 You can also calculate rouge scores by using the ``ROUGE-1.5.5`` script.
 After the setup of ``ROUGE-1.5.5`` and the execution of `predict.sh`, you can ran the following command for obtaining rouge scores for each model:
 `````
@@ -55,6 +55,7 @@ After the setup of ``ROUGE-1.5.5`` and the execution of `predict.sh`, you can ra
 ### Calculate rouge for the BNC Corpus ###
 ./scripts/predict/bcn/rouge.sh
 `````
+Rouge scores are also stored in the file ``results/test_{dataset type}_{evaluation metric}.csv``, respectively.
 The reference compression is located on ``dataset/``, and the system compression is located on ``models/{dataset size}/{model name}_{process id}/comp.txt``.
 
 ## Compressed Sentences
