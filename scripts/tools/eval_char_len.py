@@ -15,12 +15,6 @@ doc_len = 0
 comp_rate = 0
 
 for line_inp in inp_file:
-    prec_cor = 0
-    prec_all = 0
-    recall_cor = 0
-    recall_all = 0
-    tok_all = 0
-    tok_kept = 0
     line_sys = sys_file.readline()
     assert(line_sys)
     line_sys = line_sys.rstrip("\r\n")
