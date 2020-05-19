@@ -53,7 +53,7 @@ We select a model with the best F-1 score on the development dataset for the eva
 ### Filtering for the Human Evaluation
 
 To remove ambiguous sentences, we filtered out following pairs:
-- Sentence and its compression is same.
+- Sentence and its compression are the same.
 - Including double quotations in the sentence.
 - The sentence includes a word its all characters are capitalized.
 - Depend on other sentences.
