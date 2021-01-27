@@ -34,9 +34,13 @@ for line_label in label_file:
         if toks_label[i] == "1":
             if comp_txt != "":
                 comp_txt += " "
+            """
+            Automatic capitalization. Now disabled to reproduce the reported scores.
             if tok_id == 0:
                 comp_txt += toks_txt[i][0].upper() + toks_txt[i][1:]
             else:
                 comp_txt += toks_txt[i]
+            """
+            comp_txt += toks_txt[i]
             tok_id += 1
     print(comp_txt, file=std_out)
